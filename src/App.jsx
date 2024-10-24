@@ -6,6 +6,9 @@ import ProfilePage from "./routes/profilePage/profilePage";
 import Login from "./routes/login/login";
 import Signup from "./routes/signup/signup";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import UserManagement from "./admin/routes/userManagementPage/UserManagement";
+import OrderManagement from "./admin/routes/orderManagement/OrderManagement";
+import BookingForm from "./routes/bookingForm/BookingForm";
 function App() {
   const router = createBrowserRouter([
     {
@@ -35,6 +38,19 @@ function App() {
         {
           path: "/signup",
           element: <Signup/>,
+        },
+        {
+          path: "/booking",
+          element: <BookingForm />,
+        },
+        {
+          path: "/admin/user",
+          element: <UserManagement />,
+
+        },
+        {
+          path: "/admin/order",
+          element: <OrderManagement />,
         },
       ],
     },
