@@ -231,11 +231,114 @@ export const singlePostData = {
   placeType: "inside",
 };
 
-export const userData = {
-  id: 1,
-  name: "John Doe",
-  img: "https://images.pexels.com/photos/13969614/pexels-photo-13969614.jpeg?auto=compress&cs=tinysrgb&w=400",
-};
+export const userData = [
+  {
+    id: 1,
+    name: "John Doe",
+    img: "https://images.pexels.com/photos/13969614/pexels-photo-13969614.jpeg?auto=compress&cs=tinysrgb&w=400",
+    email: "john@gmail.com",
+    password: "123456"
+  },
+  {
+    id: 2,
+    name: "Jane Smith",
+    img: "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=400",
+    email: "jane.smith@gmail.com",
+    password: "abcdef"
+  },
+  {
+    id: 3,
+    name: "Bob Johnson",
+    img: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=400",
+    email: "bob.johnson@gmail.com",
+    password: "qwerty"
+  },
+  {
+    id: 4,
+    name: "Alice Brown",
+    img: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=400",
+    email: "alice.brown@gmail.com",
+    password: "password"
+  },
+  {
+    id: 5,
+    name: "Michael Scott",
+    img: "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=400",
+    email: "michael.scott@gmail.com",
+    password: "dundermifflin"
+  },
+  {
+    id: 6,
+    name: "Pam Beesly",
+    img: "https://images.pexels.com/photos/20787/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=400",
+    email: "pam.beesly@gmail.com",
+    password: "jimhalpert"
+  },
+  {
+    id: 7,
+    name: "Jim Halpert",
+    img: "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=400",
+    email: "jim.halpert@gmail.com",
+    password: "pamforever"
+  },
+  {
+    id: 8,
+    name: "Dwight Schrute",
+    img: "https://images.pexels.com/photos/91224/pexels-photo-91224.jpeg?auto=compress&cs=tinysrgb&w=400",
+    email: "dwight.schrute@gmail.com",
+    password: "beets123"
+  },
+  {
+    id: 9,
+    name: "Angela Martin",
+    img: "https://images.pexels.com/photos/458649/pexels-photo-458649.jpeg?auto=compress&cs=tinysrgb&w=400",
+    email: "angela.martin@gmail.com",
+    password: "catslover"
+  },
+  {
+    id: 10,
+    name: "Stanley Hudson",
+    img: "https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?auto=compress&cs=tinysrgb&w=400",
+    email: "stanley.hudson@gmail.com",
+    password: "pretzelday"
+  },
+  {
+    id: 11,
+    name: "Kevin Malone",
+    img: "https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&w=400",
+    email: "kevin.malone@gmail.com",
+    password: "chilis123"
+  },
+  {
+    id: 12,
+    name: "Ryan Howard",
+    img: "https://images.pexels.com/photos/936734/pexels-photo-936734.jpeg?auto=compress&cs=tinysrgb&w=400",
+    email: "ryan.howard@gmail.com",
+    password: "temp123"
+  },
+  {
+    id: 13,
+    name: "Kelly Kapoor",
+    img: "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=400",
+    email: "kelly.kapoor@gmail.com",
+    password: "fashionista"
+  },
+  {
+    id: 14,
+    name: "Oscar Martinez",
+    img: "https://images.pexels.com/photos/1138903/pexels-photo-1138903.jpeg?auto=compress&cs=tinysrgb&w=400",
+    email: "oscar.martinez@gmail.com",
+    password: "accountant"
+  },
+  {
+    id: 15,
+    name: "Meredith Palmer",
+    img: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400",
+    email: "meredith.palmer@gmail.com",
+    password: "party123"
+  }
+];
+
 
 export const chatData = [
   {
@@ -256,4 +359,146 @@ export const chatData = [
     name: "John Doe",
     img: "https://images.pexels.com/photos/13969614/pexels-photo-13969614.jpeg?auto=compress&cs=tinysrgb&w=400",
     lastMessage: "Hello, how can I help you?",},
+];
+
+export const orderData = [
+  {
+    id: 1,
+    customerName: "John Doe",
+    eventDate: "2024-12-15",
+    venue: "Grand Ballroom",
+    guestCount: 150,
+    totalCost: 5000000,
+    status: ["Booking", "Confirmation", "Payment"],
+    bookingDate: "2024-10-01",
+    paymentMethod: "Credit Card",
+    notes: "Need extra decoration.",
+    img: "https://images.pexels.com/photos/26898886/pexels-photo-26898886/free-photo-of-people-sitting-outdoors.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+  },
+  {
+    id: 2,
+    customerName: "Jane Smith",
+    review: "Corporate Annual Meeting",
+    eventDate: "2024-11-20",
+    venue: "Conference Hall",
+    guestCount: 300,
+    totalCost: 10000000,
+    status: ["Booking", "Confirmation", "Payment", "Preparation", "Event", "Post-Event", "Follow-up"],
+    bookingDate: "2024-09-25",
+    paymentMethod: "Bank Transfer",
+    notes: "Require AV equipment.",
+    img: "https://images.pexels.com/photos/26898886/pexels-photo-26898886/free-photo-of-people-sitting-outdoors.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+  },
+  {
+    id: 3,
+    customerName: "Emily Johnson",
+    review: "Birthday Party",
+    eventDate: "2024-12-05",
+    venue: "Garden Area",
+    guestCount: 50,
+    totalCost: 2000000,
+    status: ["Booking", "Confirmation"],
+    bookingDate: "2024-10-05",
+    paymentMethod: "Cash",
+    notes: "Theme: Tropical.",
+    img: "https://images.pexels.com/photos/26898886/pexels-photo-26898886/free-photo-of-people-sitting-outdoors.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+  },
+  {
+    id: 4,
+    customerName: "Michael Brown",
+    review: "Product Launch",
+    eventDate: "2024-11-10",
+    venue: "Convention Center",
+    guestCount: 200,
+    totalCost: 8000000,
+    status: ["Booking", "Confirmation", "Payment", "Preparation"],
+    bookingDate: "2024-09-15",
+    paymentMethod: "Credit Card",
+    notes: "Requires promotional materials.",
+    img: "https://images.pexels.com/photos/26898886/pexels-photo-26898886/free-photo-of-people-sitting-outdoors.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+  },
+  {
+    id: 5,
+    customerName: "Sarah Wilson",
+    review: "Charity Gala",
+    eventDate: "2024-12-20",
+    venue: "Grand Ballroom",
+    guestCount: 400,
+    totalCost: 15000000,
+    status: ["Booking", "Confirmation", "Payment", "Preparation", "Event"],
+    bookingDate: "2024-09-30",
+    paymentMethod: "Bank Transfer",
+    notes: "Special guest appearance.",
+    img: "https://images.pexels.com/photos/26898886/pexels-photo-26898886/free-photo-of-people-sitting-outdoors.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+  },
+  {
+    id: 6,
+    customerName: "David Taylor",
+    review: "Networking Event",
+    eventDate: "2024-11-15",
+    venue: "Lounge Area",
+    guestCount: 100,
+    totalCost: 4000000,
+    status: ["Booking", "Confirmation", "Payment"],
+    bookingDate: "2024-10-02",
+    paymentMethod: "Credit Card",
+    notes: "Refreshments required.",
+    img: "https://images.pexels.com/photos/26898886/pexels-photo-26898886/free-photo-of-people-sitting-outdoors.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+  },
+  {
+    id: 7,
+    customerName: "Laura Miller",
+    review: "Graduation Ceremony",
+    eventDate: "2024-11-25",
+    venue: "Auditorium",
+    guestCount: 250,
+    totalCost: 6000000,
+    status: ["Booking", "Confirmation", "Payment", "Preparation", "Event"],
+    bookingDate: "2024-09-10",
+    paymentMethod: "Cash",
+    notes: "Need a projector.",
+    img: "https://images.pexels.com/photos/26898886/pexels-photo-26898886/free-photo-of-people-sitting-outdoors.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+  },
+  {
+    id: 8,
+    customerName: "James Anderson",
+    review: "Team Building Retreat",
+    eventDate: "2024-10-30",
+    venue: "Outdoor Park",
+    guestCount: 75,
+    totalCost: 3500000,
+    status: ["Booking", "Confirmation", "Payment"],
+    bookingDate: "2024-10-01",
+    paymentMethod: "Credit Card",
+    notes: "Include team activities.",
+    img: "https://images.pexels.com/photos/26898886/pexels-photo-26898886/free-photo-of-people-sitting-outdoors.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+  },
+  {
+    id: 9,
+    customerName: "Jessica Harris",
+    review: "Anniversary Celebration",
+    eventDate: "2024-12-01",
+    venue: "Private Villa",
+    guestCount: 60,
+    totalCost: 3000000,
+    status: ["Booking", "Confirmation", "Payment", "Preparation"],
+    bookingDate: "2024-10-03",
+    paymentMethod: "Bank Transfer",
+    notes: "Catering needed.",
+    img: "https://images.pexels.com/photos/26898886/pexels-photo-26898886/free-photo-of-people-sitting-outdoors.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+  },
+  {
+    id: 10,
+    customerName: "Robert Young",
+    review: "Workshop on Innovation",
+    eventDate: "2024-11-05",
+    venue: "Training Room",
+    guestCount: 40,
+    totalCost: 2500000,
+    status: ["Booking", "Confirmation", "Payment"],
+    bookingDate: "2024-09-20",
+    paymentMethod: "Cash",
+    notes: "Materials to be provided.",
+    img: "https://images.pexels.com/photos/26898886/pexels-photo-26898886/free-photo-of-people-sitting-outdoors.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+  }
 ];

@@ -1,7 +1,7 @@
 import { listData } from '../../lib/venue_data_20';
 import './listPage.scss';
 import Filter from '../../components/filter/Filter';
-import Card from '../../components/crad/Card';
+import Card from '../../components/card/Card';
 import Map from '../../components/map/Map';
 
 export default function listPage() {

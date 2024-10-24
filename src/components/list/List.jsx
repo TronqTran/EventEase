@@ -1,5 +1,5 @@
 import { listData } from '../../lib/venue_data_20';
-import Card from '../crad/Card'
+import Card from '../card/Card'
 import './list.scss';
 
 export default function List() {
