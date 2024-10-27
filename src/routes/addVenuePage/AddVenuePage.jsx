@@ -1,5 +1,5 @@
 import Slider from "../../components/slider/Slider";
-import "./singlePage.scss";
+import "./addVenuePage.scss";
 import { singlePostData, userData } from "../../lib/venue_data_20";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -17,16 +17,9 @@ import {
   faVolumeHigh,
 } from "@fortawesome/free-solid-svg-icons";
 import Map from "../../components/map/Map";
-import { useNavigate } from "react-router-dom";
 export default function SinglePage() {
-
-  const navigate = useNavigate();
-  const handleSelect = () => {
-    navigate("/service");
-  };
-
   return (
-    <div className="singlePage">
+    <div className="addVenuePage">
       <div className="details">
         <div className="wrapper">
           <Slider images={singlePostData.images} />
@@ -45,13 +38,13 @@ export default function SinglePage() {
                 <div className="price">{singlePostData.price} VND</div>
               </div>
               <div className="user">
-                <img src={userData[1].img} alt="" />
-                <span>{userData[1].name}</span>
+                <img src={userData.img} alt="" />
+                <span>{userData.name}</span>
               </div>
             </div>
             <div className="description">{singlePostData.description}</div>
             <div className="bottom">
-              <button onClick={handleSelect}>Select</button>
+              <button>Booking</button>
             </div>
           </div>
         </div>

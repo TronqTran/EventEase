@@ -14,3 +14,15 @@ export const register = async (data) => {
   });
   return response.data;
 };
+
+export const login = async (data) => {
+  const response = await axios ({
+    url: URL_BASE + '/auth/login',
+    method: 'POST',
+    data: {
+      email: data.email,
+      passWordAccount: data.password,
+    }
+  });
+  return response;
+}
