@@ -1,27 +1,34 @@
-
+import { login } from "../../api/auth";
 import { useNavigate } from 'react-router-dom';
 import './login.scss';
-import axios from 'axios';
+import {loginSuccess} from '../../redux/reducer';
+import { useState } from 'react';
 export default function Login() {
 
   const navigate = useNavigate();
+  
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData(e.target);    
-    const email = formData.get("email");
-    const password = formData.get("password");
+    try {
+      console.log(formData)
+      const response = await login(formData);
+      console.log('Đăng nhập thành công:', response.data);
+      localStorage.setItem('token', response.data.token);
 
-     try {      
-      const response = await axios.post("http://localhost:8521/KLTN-2024/api/v1/auth/login", {
-        email: email,
-        passWordAccount: password,
-      });
-      navigate("/");     
-    } catch (error) {
-      if (error.response && error.response.status === 400) {
-        alert(error.response.data.message);
-      }
+      navigate('/');
+    } catch (err) {
+      console.error('Lỗi khi đăng nhập:', err.message);
     }
   };
 
@@ -30,8 +37,8 @@ export default function Login() {
         <div className="inputContainer">
           <h1>Sign In</h1>
           <form onSubmit={handleSubmit}>
-            <input type="email" name='email' placeholder='Email' />
-            <input type="password" name='password' placeholder='Password' />
+            <input type="email" name='email' placeholder='Email' onChange={handleChange}/>
+            <input type="password" name='password' placeholder='Password' onChange={handleChange}/>
             <button>Sign In</button>    
           </form>
           <span>Don not have an account? <a href="/signup">Sign Up</a></span>

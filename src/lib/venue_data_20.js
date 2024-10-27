@@ -502,3 +502,11 @@ export const orderData = [
     img: "https://images.pexels.com/photos/26898886/pexels-photo-26898886/free-photo-of-people-sitting-outdoors.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
   }
 ];
+
+export const services = [
+  { id: 1, name: "Catering", description: "Food and beverage service", price: 1000000 },
+  { id: 2, name: "Photography", description: "Professional photography for the event", price: 500000 },
+  { id: 3, name: "DJ/MC", description: "Music and event hosting", price: 800000 },
+  { id: 4, name: "Decoration", description: "Event venue decoration", price: 1200000 },
+  { id: 5, name: "Security", description: "Security service for the event", price: 400000 },
+];

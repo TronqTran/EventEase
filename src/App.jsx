@@ -5,10 +5,14 @@ import SinglePage from "./routes/singlePage/SinglePage";
 import ProfilePage from "./routes/profilePage/profilePage";
 import Login from "./routes/login/login";
 import Signup from "./routes/signup/signup";
+import ServicePage from "./routes/servicePage/ServicePage";
+import BookingPage from "./routes/bookingPage/BookingPage";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import store from "./redux/store";
 import UserManagement from "./admin/routes/userManagementPage/UserManagement";
 import OrderManagement from "./admin/routes/orderManagement/OrderManagement";
-import BookingForm from "./routes/bookingForm/BookingForm";
+import AddVenuePage from "./routes/addVenuePage/AddVenuePage";
+import PaymentPage from "./routes/paymentPage/PaymentPage";
 function App() {
   const router = createBrowserRouter([
     {
@@ -40,8 +44,20 @@ function App() {
           element: <Signup/>,
         },
         {
+          path: "/service",
+          element: <ServicePage />,
+        },
+        {
           path: "/booking",
-          element: <BookingForm />,
+          element: <BookingPage />,
+        },
+        {
+          path: "payment",
+          element: <PaymentPage />,
+        },
+        {
+          path: "/add/venue",
+          element: <AddVenuePage />,
         },
         {
           path: "/admin/user",
@@ -56,7 +72,7 @@ function App() {
     },
   ]);
 
-  return <RouterProvider router={router} />;
+  return <RouterProvider router={router} store={store} />;
 }
 
 export default App;

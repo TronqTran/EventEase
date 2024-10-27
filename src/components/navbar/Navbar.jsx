@@ -5,8 +5,8 @@ import NavbarAd from "../../admin/components/navbar/NavbarAd";
 export default function Navbar() {
   const [open, setOpen] = useState(false);
 
-  const user = false;
-  const admin = true;
+  const user = true;
+  const admin = false;
 
   return (
     <nav>
