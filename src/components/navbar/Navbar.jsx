@@ -2,10 +2,12 @@ import { useState } from "react";
 import "./navbar.scss";
 import { Link } from "react-router-dom";
 import NavbarAd from "../../admin/components/navbar/NavbarAd";
+import { useSelector } from "react-redux";
 export default function Navbar() {
   const [open, setOpen] = useState(false);
 
-  const user = true;
+  const user = useSelector((state) => state.user.user);
+
   const admin = false;
 
   return (
@@ -29,13 +31,12 @@ export default function Navbar() {
             {user ? (
               <div className="user">
                 <img
-                  src="https://images.pexels.com/photos/13969614/pexels-photo-13969614.jpeg?auto=compress&cs=tinysrgb&w=400"
+                  src= {user.image}
                   alt=""
-                />
-                <span>John Doe</span>
+                />           
                 <Link to="/profile" className="profile">
                   <div className="notification">3</div>
-                  <span>Profile</span>
+                  <span>{user.username}</span>
                 </Link>
               </div>
             ) : (

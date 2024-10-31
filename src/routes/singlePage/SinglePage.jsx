@@ -19,18 +19,37 @@ import {
 import Map from "../../components/map/Map";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { selectVenue, setView } from "../../redux/reducer";
+
 export default function SinglePage() {
   const location = useLocation();
   const venue = location.state?.venue;
+  const user = useSelector((state) => state.user.user);
+
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const handleSelect = () => {
-    navigate("/service", { state: { venue } });
+    if (!user) {
+      dispatch(setView(location.pathname));
+      dispatch(selectVenue(venue));      
+      navigate("/login");
+    } else {
+      navigate("/service", { state: { venue } });
+    }
   };
 
   const [isChatVisible, setIsChatVisible] = useState(false);
   const toggleChat = () => {
-    setIsChatVisible((prev) => !prev); // Toggle chat visibility
+    if (!user) {
+      dispatch(setView(location.pathname));
+      dispatch(selectVenue(venue));
+      navigate("/login");
+    } else {
+      setIsChatVisible((prev) => !prev);
+    }
   };
 
   return (
