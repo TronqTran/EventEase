@@ -3,12 +3,12 @@ import "./PaymentModal.scss";
 
 export default function PaymentModal() {
   return (
-    <div className="modal">
-      <form className="form">
-        <h2>Payment Information</h2>
-        <div className="credit-card-info--form">
-          <div className="input_container">
-            <label className="input_label" htmlFor="cardholder_name">
+    <div className="paymentmodal">
+      <form className="paymentmodalform">
+        <h2 className="paymentmodaltitle">Payment Information</h2>
+        <div className="paymentmodalcreditcardinfo">
+          <div className="paymentmodalinputcontainer">
+            <label className="paymentmodalinputlabel" htmlFor="cardholder_name">
               Cardholder Full Name
             </label>
             <input
@@ -16,13 +16,13 @@ export default function PaymentModal() {
               title="Input title"
               name="cardholder_name"
               type="text"
-              className="input_field"
+              className="paymentmodalinputfield"
               id="cardholder_name"
               required
             />
           </div>
-          <div className="input_container">
-            <label className="input_label" htmlFor="card_number">
+          <div className="paymentmodalinputcontainer">
+            <label className="paymentmodalinputlabel" htmlFor="card_number">
               Card Number
             </label>
             <input
@@ -30,22 +30,22 @@ export default function PaymentModal() {
               title="Input title"
               name="card_number"
               type="text"
-              className="input_field"
+              className="paymentmodalinputfield"
               id="card_number"
               required
             />
           </div>
-          <div className="input_container">
-            <label className="input_label" htmlFor="expiry_cvv">
+          <div className="paymentmodalinputcontainer">
+            <label className="paymentmodalinputlabel" htmlFor="expiry_cvv">
               Expiry Date / CVV
             </label>
-            <div className="split">
+            <div className="paymentmodalinputsplit">
               <input
                 placeholder="MM/YY"
                 title="Expiry Date"
                 name="expiry_date"
                 type="text"
-                className="input_field"
+                className="paymentmodalinputfield"
                 id="expiry_date"
                 required
               />
@@ -54,29 +54,29 @@ export default function PaymentModal() {
                 title="CVV"
                 name="cvv"
                 type="text"
-                className="input_field"
+                className="paymentmodalinputfield"
                 id="cvv"
                 required
               />
             </div>
           </div>
-          <button type="submit" className="purchase--btn">
+          <button type="submit" className="paymentmodalcheckoutbutton">
             Checkout
           </button>
-          <div className="separator">
-            <hr className="line" />
+          <div className="paymentmodalseparator">
+            <hr className="paymentmodalline" />
             <p>or pay using e-wallet</p>
-            <hr className="line" />
+            <hr className="paymentmodalline" />
           </div>
-          <div className="payment--options">
-            <button type="button" name="paypal" className="payment-btn">
-              <img src="path/to/paypal-logo.png" alt="PayPal" />
+          <div className="paymentmodaloptions">
+            <button type="button" name="paypal" className="paymentmodalpaymentbutton">  
+              <img src="https://th.bing.com/th/id/OIP.FWBt0ze4Q8KVB4kjjPCFCQHaD4?w=290&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt="PayPal" />      
             </button>
-            <button type="button" name="apple-pay" className="payment-btn">
-              <img src="path/to/apple-pay-logo.png" alt="Apple Pay" />
+            <button type="button" name="apple-pay" className="paymentmodalpaymentbutton">
+              <img src="https://th.bing.com/th/id/OIP.D2xUWoMreipVyr04H04hcQHaDs?w=335&h=174&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt="Apple Pay" />
             </button>
-            <button type="button" name="google-pay" className="payment-btn">
-              <img src="path/to/google-pay-logo.png" alt="Google Pay" />
+            <button type="button" name="google-pay" className="paymentmodalpaymentbutton">
+              <img src="https://th.bing.com/th/id/OIP.82fObEscmV-byfk9OeXyZAHaEe?w=254&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt="Google Pay" />
             </button>
           </div>
         </div>

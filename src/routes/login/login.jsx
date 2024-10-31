@@ -1,11 +1,15 @@
 import { login } from "../../api/auth";
 import { useNavigate } from 'react-router-dom';
 import './login.scss';
-import {loginSuccess} from '../../redux/reducer';
+import {clearVenue, clearView, loginSuccess} from '../../redux/reducer';
 import { useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
 export default function Login() {
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const savedView = useSelector((state) => state.view.currentView);
+  const savedVenue = useSelector((state) => state.venue.venueSelected);
   
   const [formData, setFormData] = useState({
     email: '',
@@ -21,12 +25,25 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log(formData)
       const response = await login(formData);
-      console.log('Đăng nhập thành công:', response.data);
+     
       localStorage.setItem('token', response.data.token);
+      localStorage.setItem('user', JSON.stringify(response.data.account));
 
-      navigate('/');
+      dispatch(loginSuccess({
+        user: response.data.account,
+        token: response.data.token,
+      }));
+      
+      if (savedView) {
+        
+        navigate(savedView, { state: { venue: savedVenue } });
+        dispatch(clearView());
+        dispatch(clearVenue());
+      } else {
+        navigate('/');
+      }
+
     } catch (err) {
       console.error('Lỗi khi đăng nhập:', err.message);
     }

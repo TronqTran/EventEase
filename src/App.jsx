@@ -1,3 +1,6 @@
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "./redux/store";
 import HomePage from "./routes/homePage/homePage";
 import ListPage from "./routes/listPage/listPage";
 import Layout from "./routes/layout/layout";
@@ -7,14 +10,15 @@ import Login from "./routes/login/login";
 import Signup from "./routes/signup/signup";
 import ServicePage from "./routes/servicePage/ServicePage";
 import BookingPage from "./routes/bookingPage/BookingPage";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import store from "./redux/store";
 import UserManagement from "./admin/routes/userManagementPage/UserManagement";
 import OrderManagement from "./admin/routes/orderManagement/OrderManagement";
 import AddVenuePage from "./routes/addVenuePage/AddVenuePage";
 import PaymentPage from "./routes/paymentPage/PaymentPage";
 import OrderPage from "./routes/orderPage/OrderPage";
+import UpdateProfile from "./routes/updateProfile/UpdateProfile";
+
 function App() {
+
   const router = createBrowserRouter([
     {
       path: "/",
@@ -37,8 +41,12 @@ function App() {
           element: <ProfilePage />,
         },
         {
+          path: "/update",
+          element: <UpdateProfile />,
+        },
+        {
           path: "/login",
-          element: <Login/>,
+          element: <Login />,
         },
         {
           path: "/order",
@@ -46,7 +54,7 @@ function App() {
         },
         {
           path: "/signup",
-          element: <Signup/>,
+          element: <Signup />,
         },
         {
           path: "/service",
@@ -57,7 +65,7 @@ function App() {
           element: <BookingPage />,
         },
         {
-          path: "payment",
+          path: "/payment",
           element: <PaymentPage />,
         },
         {
@@ -67,7 +75,6 @@ function App() {
         {
           path: "/admin/user",
           element: <UserManagement />,
-
         },
         {
           path: "/admin/order",
@@ -77,7 +84,11 @@ function App() {
     },
   ]);
 
-  return <RouterProvider router={router} store={store} />;
+  return (
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
+  );
 }
 
 export default App;
