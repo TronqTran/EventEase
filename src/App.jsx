@@ -16,6 +16,7 @@ import AddVenuePage from "./routes/addVenuePage/AddVenuePage";
 import PaymentPage from "./routes/paymentPage/PaymentPage";
 import OrderPage from "./routes/orderPage/OrderPage";
 import UpdateProfile from "./routes/updateProfile/UpdateProfile";
+import CreateService from "./routes/createService/CreateService";
 
 function App() {
 
@@ -71,6 +72,10 @@ function App() {
         {
           path: "/add/venue",
           element: <AddVenuePage />,
+        },
+        {
+          path: "/add/venue/step-2",
+          element: <CreateService />,
         },
         {
           path: "/admin/user",

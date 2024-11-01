@@ -15,6 +15,7 @@ import {
   faWind,
   faUtensils,
   faVolumeHigh,
+  faLightbulb,
 } from "@fortawesome/free-solid-svg-icons";
 import Map from "../../components/map/Map";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -27,14 +28,13 @@ export default function SinglePage() {
   const venue = location.state?.venue;
   const user = useSelector((state) => state.user.user);
 
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleSelect = () => {
     if (!user) {
       dispatch(setView(location.pathname));
-      dispatch(selectVenue(venue));      
+      dispatch(selectVenue(venue));
       navigate("/login");
     } else {
       navigate("/service", { state: { venue } });
@@ -112,48 +112,107 @@ export default function SinglePage() {
 
           <p className="title">Facilities and Services</p>
           <div className="services">
-            <div className="service">
-              <FontAwesomeIcon icon={faWifi} />
-              <span>Free Wifi</span>
-            </div>
-
-            <div className="service">
-              <FontAwesomeIcon icon={faSquareParking} />
-              <span>Parking</span>
-            </div>
-
-            <div className="service">
-              <FontAwesomeIcon icon={faUtensils} />
-              <span>Catering</span>
-            </div>
-
-            <div className="services">
+            {venue.features.includes("Free Wifi") && (
+              <div className="service">
+                <FontAwesomeIcon icon={faWifi} />
+                <span>Free Wifi</span>
+              </div>
+            )}
+            {venue.features.includes("Parking") && (
+              <div className="service">
+                <FontAwesomeIcon icon={faSquareParking} />
+                <span>Parking</span>
+              </div>
+            )}
+            {venue.features.includes("Catering") && (
+              <div className="service">
+                <FontAwesomeIcon icon={faUtensils} />
+                <span>Catering</span>
+              </div>
+            )}
+            {venue.features.includes("Air Conditioner") && (
               <div className="service">
                 <FontAwesomeIcon icon={faWind} />
                 <span>Air Conditioner</span>
               </div>
-            </div>
-
-            <div className="service">
-              <FontAwesomeIcon icon={faVolumeHigh} />
-              <span>Sound System</span>
-            </div>
+            )}
+            {venue.features.includes("Sound System") && (
+              <div className="service">
+                <FontAwesomeIcon icon={faVolumeHigh} />
+                <span>Sound System</span>
+              </div>
+            )}
+            {venue.features.includes("Lighting System") && (
+              <div className="service">
+                <FontAwesomeIcon icon={faLightbulb} />
+                <span>Lighting System</span>
+              </div>
+            )}
+            {venue.features.includes("Rest Area") && (
+              <div className="service">
+                <FontAwesomeIcon icon={faPersonShelter} />
+                <span>Rest Area</span>
+              </div>
+            )}
           </div>
 
           <p className="title">Type of Event</p>
           <div className="listHorizontal">
-            <div className="areaText">
-              <span>Wedding</span>
-            </div>
-            <div className="areaText">
-              <span>Party</span>
-            </div>
-            <div className="areaText">
-              <span>Meeting</span>
-            </div>
-            <div className="areaText">
-              <span>Conference</span>
-            </div>
+            {venue.eventTypes.includes("Wedding") && (
+              <div className="areaText">
+                <span>Wedding</span>
+              </div>
+            )}
+            {venue.eventTypes.includes("Birthday") && (
+              <div className="areaText">
+                <span>Birthday</span>
+              </div>
+            )}
+            {venue.eventTypes.includes("Conference") && (
+              <div className="areaText">
+                <span>Conference</span>
+              </div>
+            )}
+            {venue.eventTypes.includes("Party") && (
+              <div className="areaText">
+                <span>Party</span>
+              </div>
+            )}
+            {venue.eventTypes.includes("Meeting") && (
+              <div className="areaText">
+                <span>Meeting</span>
+              </div>
+            )}
+            {venue.eventTypes.includes("Trade Shows") && (
+              <div className="areaText">
+                <span>Trade Shows</span>
+              </div>
+            )}
+            {venue.eventTypes.includes("Product Launches") && (
+              <div className="areaText">
+                <span>Product Launches</span>
+              </div>
+            )}
+            {venue.eventTypes.includes("Anniversary Parties") && (
+              <div className="areaText">
+                <span>Anniversary Parties</span>
+              </div>
+            )}
+            {venue.eventTypes.includes("Festivals") && (
+              <div className="areaText">
+                <span>Festivals</span>
+              </div>
+            )}
+            {venue.eventTypes.includes("Concerts") && (
+              <div className="areaText">
+                <span>Concerts</span>
+              </div>
+            )}
+            {venue.eventTypes.includes("Art Exhibitions") && (
+              <div className="areaText">
+                <span>Art Exhibitions</span>
+              </div>
+            )}
           </div>
           <p className="title">Location</p>
           <div className="mapContainer">
@@ -171,29 +230,24 @@ export default function SinglePage() {
           </div>
         </div>
         {isChatVisible && (
-        <div className="chatBox">
-          <div className="top">
-            <div className="user">
-              <img
-                src={venue.author.img}
-                alt=""
-              />
-              {venue.author.name}
+          <div className="chatBox">
+            <div className="top">
+              <div className="user">
+                <img src={venue.author.img} alt="" />
+                {venue.author.name}
+              </div>
+              <span className="close" onClick={toggleChat}>
+                X
+              </span>
             </div>
-            <span className="close" onClick={toggleChat}>
-              X
-            </span>
+            <div className="center"></div>
+            <div className="bottom">
+              <textarea></textarea>
+              <button>Send</button>
+            </div>
           </div>
-          <div className="center">
-            
-          </div>
-          <div className="bottom">
-            <textarea></textarea>
-            <button>Send</button>
-          </div>
-        </div>
-      )}
-      </div>      
+        )}
+      </div>
     </div>
   );
 }
@@ -215,6 +269,8 @@ SinglePage.propTypes = {
     size: PropTypes.number,
     description: PropTypes.string,
     placeType: PropTypes.string,
+    features: PropTypes.arrayOf(PropTypes.string).isRequired,
+    eventTypes: PropTypes.arrayOf(PropTypes.string).isRequired,
     services: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
