@@ -15,6 +15,10 @@ export default function ProfilePage() {
         navigate('/update')
     };
 
+    const createPost = () => {
+        navigate('/add/venue')
+    };
+
   return (
     <div className='profilePage'>
     <div className="details">
@@ -31,7 +35,7 @@ export default function ProfilePage() {
             </div>
             <div className="title">
                 <h1>My List</h1>
-                <button>Create New Post</button>
+                <button onClick={()=>createPost()}>Create New Post</button>
             </div>
                 <List />
             <div className="title">
