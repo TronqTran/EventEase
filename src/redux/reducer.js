@@ -37,7 +37,13 @@ const userSlice = createSlice({
       state.error = null;
       localStorage.removeItem('user');
       localStorage.removeItem('token');
-    }
+    },
+    updateAvatar: (state, action) => {
+      if (state.user) {
+        state.user.image = action.payload; 
+        localStorage.setItem('user', JSON.stringify(state.user)); 
+      }
+    },
   }
 });
 
@@ -67,7 +73,7 @@ const venueSlice = createSlice({
   },
 });
 
-export const { loginSuccess, loginFailure, logout } = userSlice.actions;
+export const { loginSuccess, loginFailure, logout, updateAvatar } = userSlice.actions;
 export const { setView, clearView } = viewSlice.actions;
 export const { selectVenue, clearVenue } = venueSlice.actions;
 
