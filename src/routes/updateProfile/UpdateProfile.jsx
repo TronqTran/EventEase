@@ -34,6 +34,7 @@ export default function UpdateProfile() {
 
   const handleImageChange = async (event) => {
     const file = event.target.files[0];
+    console.log("Selected image:", file);
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
@@ -43,7 +44,7 @@ export default function UpdateProfile() {
 
       // Gọi hàm updateAvatar để lưu hoặc cập nhật ảnh
       try {
-        const result = await updateAvatarService(file);
+        const result = await updateAvatarService(file); // Pass the token here
         console.log("Image uploaded successfully:", result);
         
         // Cập nhật lại avatar trong Redux store
@@ -72,7 +73,7 @@ export default function UpdateProfile() {
           accept="image/*" // Chỉ cho phép chọn hình ảnh
         />
         <div className="info">
-          <p><strong>Username:</strong> {user.username}</p>
+          <p><strong>Username:</strong> {user.userName}</p>
           <p><strong>Email:</strong> {user.email}</p>
           <p><strong>Phone Number:</strong> {user.phoneNumber}</p>
         </div>

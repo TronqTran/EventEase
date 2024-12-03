@@ -31,7 +31,7 @@ export default function ProfilePage() {
                 <span>Avartar:
                 <img src={user.image} alt="" />
                 </span>
-                <span>Name: <b>{user.username}</b></span>
+                <span>Name: <b>{user.userName}</b></span>
             </div>
             <div className="title">
                 <h1>My List</h1>

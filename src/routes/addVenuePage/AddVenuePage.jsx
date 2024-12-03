@@ -16,66 +16,72 @@ import Map from "../../components/map/Map";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { postLocation, uploadLocationImage } from "../../api/locationService";
 
 export default function SinglePage() {
   const [size, setSize] = useState(10);
   const [capacity, setCapacity] = useState(10);
-  const [coordinates, setCoordinates] = useState({
-    latitude: 10.774431,
-    longitude: 106.694991,
-  });
+  const [latitude, setLatitude] = useState(10.774431);
+  const [longitude, setLongitude] = useState(106.694991);
+  const [bigImage, setBigImage] = useState(null);
+  const [smallImage1, setSmallImage1] = useState(null);
+  const [smallImage2, setSmallImage2] = useState(null);
+  const [smallImage3, setSmallImage3] = useState(null);
+  const [imgVenue, setImgVenue] = useState(null);
 
   const user = useSelector((state) => state.user.user);
+  const token = useSelector((state) => state.user.token);
   const navigate = useNavigate();
 
   const handleLatitudeChange = (e) => {
-    setCoordinates((prev) => ({
-      ...prev,
-      latitude: parseFloat(e.target.value),
-    }));
+    setLatitude(parseFloat(e.target.value));
   };
 
   const handleLongitudeChange = (e) => {
-    setCoordinates((prev) => ({
-      ...prev,
-      longitude: parseFloat(e.target.value),
-    }));
+    setLongitude(parseFloat(e.target.value));
   };
 
-  const handleSubmit = (e) => {
+  const handleImageChange = (e, setImage) => {
+    const file = e.target.files[0];
+    if (file) {
+      setImage(file);
+    }
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     // Validation checks
     const requiredFields = [
-      'venueName',
-      'address',
-      'price',
-      'description',
-      'latitude',
-      'longitude',
-      'size',
-      'capacity',
+      "venueName",
+      "address",
+      "price",
+      "description",
+      "latitude",
+      "longitude",
+      "size",
+      "capacity",
     ];
-  
+
     for (const field of requiredFields) {
       if (!e.target[field].value) {
         alert(`Please fill out the ${field} field.`);
         return;
       }
     }
-  
+
     const formData = {
       venueName: e.target.venueName.value,
-      imgVenue: e.target.imgVenue.files[0],
-      bigImage: e.target.bigImage.files[0],
-      smallImage1: e.target.smallImage1.files[0],
-      smallImage2: e.target.smallImage2.files[0],
-      smallImage3: e.target.smallImage3.files[0],
+      imgVenue: imgVenue,
+      bigImage: bigImage,
+      smallImage1: smallImage1,
+      smallImage2: smallImage2,
+      smallImage3: smallImage3,
       address: e.target.address.value,
       price: e.target.price.value,
       description: e.target.description.value,
       placeType: e.target.placeType.value,
-  
+
       eventTypes: [
         { name: "Conference", checked: e.target.conference.checked },
         { name: "Meeting", checked: e.target.meeting.checked },
@@ -92,7 +98,7 @@ export default function SinglePage() {
         { name: "Concerts", checked: e.target.concerts.checked },
         { name: "Art Exhibitions", checked: e.target.artExhibitions.checked },
       ],
-  
+
       features: [
         { name: "Free Wifi", checked: e.target.freeWifi.checked },
         { name: "Parking", checked: e.target.parking.checked },
@@ -102,19 +108,32 @@ export default function SinglePage() {
         { name: "Lighting System", checked: e.target.lightingSystem.checked },
         { name: "Rest Area", checked: e.target.restArea.checked },
       ],
-  
-      coordinates: {
-        latitude: parseFloat(e.target.latitude.value),
-        longitude: parseFloat(e.target.longitude.value),
-      },
-  
+
+      latitude: latitude,
+      longitude: longitude,
+
       size: parseFloat(e.target.size.value),
       capacity: parseFloat(e.target.capacity.value),
     };
-  
+
     const venueObject = createVenueObject(formData);
-    navigate("/add/venue/step-2", { state: { venue: venueObject } });
-    console.log(venueObject);
+
+    try {
+      const response = await postLocation(token, venueObject); // Gọi hàm postLocation
+      console.log("Location posted successfully:", response.id);
+
+      // Upload images
+      if (imgVenue) await uploadLocationImage(response.id, imgVenue);
+      if (bigImage) await uploadLocationImage(response.id, bigImage);
+      if (smallImage1) await uploadLocationImage(response.id, smallImage1);
+      if (smallImage2) await uploadLocationImage(response.id, smallImage2);
+      if (smallImage3) await uploadLocationImage(response.id, smallImage3);
+
+      navigate("/add/venue/step-2", { state: { venue: response } });
+    } catch (error) {
+      console.error("Error posting location:", error);
+      alert("Error posting location. Please try again.");
+    }
   };
 
   return (
@@ -126,31 +145,110 @@ export default function SinglePage() {
               type="file"
               name="bigImage"
               id="bigImage"
-              className="bigImage"
+              onChange={(e) => handleImageChange(e, setBigImage)}
+              style={{ display: "none" }} // Ẩn input file
             />
+            <div className="bigImage">
+              {bigImage ? (
+                <img
+                  src={URL.createObjectURL(bigImage)}
+                  alt="Big Venue"
+                  className="previewImage"
+                />
+              ) : (
+                <label htmlFor="bigImage" className="bigImageLabel">
+                  Click to upload big image
+                </label>
+              )}
+            </div>
             <div className="smallImages">
               <input
                 type="file"
                 name="smallImage1"
                 id="smallImage1"
-                className="smallImage"
+                style={{ display: "none" }} // Ẩn input file
+                onChange={(e) => handleImageChange(e, setSmallImage1)}
               />
+              <div className="smallImage">
+                {smallImage1 ? (
+                  <img
+                    src={URL.createObjectURL(smallImage1)}
+                    alt="Small Venue"
+                    className="smallImage"
+                  />
+                ) : (
+                  <label htmlFor="smallImage1" className="smallImageLabel">
+                    Click to upload small image
+                  </label>
+                )}
+              </div>
               <input
                 type="file"
                 name="smallImage2"
                 id="smallImage2"
-                className="smallImage"
+                style={{ display: "none" }} // Ẩn input file
+                onChange={(e) => handleImageChange(e, setSmallImage2)}
               />
+              <div className="smallImage">
+                {smallImage2 ? (
+                  <img
+                    src={URL.createObjectURL(smallImage2)}
+                    alt="Small Venue"
+                    className="smallImage"
+                  />
+                ) : (
+                  <label htmlFor="smallImage2" className="smallImageLabel">
+                    Click to upload small image
+                  </label>
+                )}
+              </div>
               <input
                 type="file"
                 name="smallImage3"
                 id="smallImage3"
-                className="smallImage"
+                style={{ display: "none" }} // Ẩn input file
+                onChange={(e) => handleImageChange(e, setSmallImage3)}
               />
+              <div className="smallImage">
+                {smallImage3 ? (
+                  <img
+                    src={URL.createObjectURL(smallImage3)}
+                    alt="Small Venue"
+                    className="smallImage"
+                  />
+                ) : (
+                  <label htmlFor="smallImage3" className="smallImageLabel">
+                    Click to upload small image
+                  </label>
+                )}
+              </div>
             </div>
           </div>
           <div className="info">
             <div className="left">
+              <label htmlFor="imgVenue">Venue Image</label>
+              <input
+                type="file"
+                name="imgVenue"
+                id="imgVenue"
+                style={{ display: "none" }} // Ẩn input file
+                onChange={(e) => handleImageChange(e, setImgVenue)}
+              />
+              <div className="imgVenue">
+              {imgVenue ? (
+                <img src={URL.createObjectURL(imgVenue)}
+                  alt="img Venue"                  
+                />
+              ) : (
+                <label htmlFor="imgVenue" className="imgVenueLabel">
+                  Click to upload venue image
+                </label>
+              )}
+              </div>
+            </div>
+
+            <div className="right">
+              <div className="name">
               <label htmlFor="venueName">Venue Name</label>
               <input
                 type="text"
@@ -158,6 +256,7 @@ export default function SinglePage() {
                 id="venueName"
                 placeholder="Venue Name"
               />
+              </div>
 
               <div className="address">
                 <label htmlFor="address">Address</label>
@@ -178,14 +277,10 @@ export default function SinglePage() {
                   placeholder="Price"
                 />
               </div>
-            </div>
 
-            <div className="right">
-              <label htmlFor="imgVenue">Venue Image</label>
-              <input type="file" name="imgVenue" id="imgVenue" />
               <div className="description">
                 <label htmlFor="description">Description</label>
-                <textarea name="description" id="description"></textarea>
+                <textarea name="description" id="description" placeholder="Description"></textarea>
               </div>
             </div>
           </div>
@@ -368,7 +463,7 @@ export default function SinglePage() {
                   type="number"
                   name="latitude"
                   id="latitude"
-                  value={coordinates.latitude}
+                  value={latitude}
                   onChange={handleLatitudeChange}
                 />
               </div>
@@ -378,12 +473,12 @@ export default function SinglePage() {
                   type="number"
                   name="longitude"
                   id="longitude"
-                  value={coordinates.longitude}
+                  value={longitude}
                   onChange={handleLongitudeChange}
                 />
               </div>
 
-              <Map items={{ id: 1, coordinates }} />
+              <Map items={[{ id: 1, latitude, longitude }]} />
             </div>
             <div className="buttons">
               <button type="submit">Next</button>

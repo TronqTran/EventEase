@@ -17,11 +17,25 @@ export default function CreateService() {
   const [selectedServices, setSelectedServices] = useState([]);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setNewService((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    const { name, value, type, files } = e.target;
+    if (type === "file") {
+      const file = files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setNewService((prev) => ({
+            ...prev,
+            img: reader.result,
+          }));
+        };
+        reader.readAsDataURL(file);
+      }
+    } else {
+      setNewService((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
   };
 
   const handleAddService = () => {
@@ -121,10 +135,9 @@ export default function CreateService() {
               <div>
                 <label htmlFor="img">Image URL</label>
                 <input
-                  type="text"
+                  type="file"
                   name="img"
                   id="img"
-                  value={newService.img}
                   onChange={handleChange}
                   required
                 />
@@ -136,7 +149,7 @@ export default function CreateService() {
                 <button type="button">Delete Services</button>
               </div>
               <div className="btnPost">
-                <button type="">Post</button>
+                <button type="submit">Post</button>
               </div>
             </form>
           </div>

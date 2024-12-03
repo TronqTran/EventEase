@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const URL_BASE = 'http://localhost:8521/KLTN-2024/api/v1';
+const URL_BASE = 'http://localhost:8521/KLTN-SERVER-2024/api/v1';
 
 /**
  * Cập nhật avatar cho người dùng.
@@ -9,7 +9,7 @@ const URL_BASE = 'http://localhost:8521/KLTN-2024/api/v1';
  */
 export const updateAvatar = async (file) => {
     const formData = new FormData();
-    formData.append('multipartFile', file); // Thêm tệp vào FormData
+    formData.append('file', file); // Thêm tệp vào FormData
 
     try {
         const response = await axios.post(`${URL_BASE}/avatars/saveOrUpdate`, formData, {

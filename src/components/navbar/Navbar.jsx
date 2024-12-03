@@ -23,6 +23,8 @@ export default function Navbar() {
               <span>EVENTEASE</span>
             </a>
             <a href="/">Home</a>
+            <a href="/location">Location</a>
+            <a href="/event">Event</a>
             <a href="/order">Order</a>
             <a href="/">About</a>
             <a href="/">Contact</a>

@@ -1,0 +1,25 @@
+.button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 123, 255, 0.8);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 18px;
+    transition: background-color 0.3s;
+
+    &:hover {
+        background-color: rgba(0, 123, 255, 1);
+    }
+}
+
+.button-left {
+    left: 10px;
+}
+
+.button-right {
+    right: 10px;
+}

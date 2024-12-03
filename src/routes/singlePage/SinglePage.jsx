@@ -1,4 +1,7 @@
-import Slider from "../../components/slider/Slider";
+import React, { useState } from "react";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import Slider from "../../components/imgSlider/Slider";
 import PropTypes from "prop-types";
 import "./singlePage.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -18,18 +21,20 @@ import {
   faLightbulb,
 } from "@fortawesome/free-solid-svg-icons";
 import Map from "../../components/map/Map";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import { selectVenue, setView } from "../../redux/reducer";
 
 export default function SinglePage() {
+  // const { id } = useParams(); // Get the ID from the URL
   const location = useLocation();
   const venue = location.state?.venue;
+  const [isChatVisible, setIsChatVisible] = useState(false);
   const user = useSelector((state) => state.user.user);
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  if (!venue) {
+    return <div>Error: Venue data is not available.</div>;
+  }
 
   const handleSelect = () => {
     if (!user) {
@@ -37,11 +42,10 @@ export default function SinglePage() {
       dispatch(selectVenue(venue));
       navigate("/login");
     } else {
-      navigate("/service", { state: { venue } });
+      navigate("/event", { state: { venue } });
     }
   };
 
-  const [isChatVisible, setIsChatVisible] = useState(false);
   const toggleChat = () => {
     if (!user) {
       dispatch(setView(location.pathname));
@@ -52,11 +56,14 @@ export default function SinglePage() {
     }
   };
 
+  // Extract image links from imageLocations
+  const imageLinks = venue.imageLocations.map((image) => image.imageLink);
+
   return (
     <div className="singlePage">
       <div className="details">
         <div className="wrapper">
-          <Slider images={venue.images} />
+          <Slider images={imageLinks} />
           <div className="info">
             <div className="top">
               <div className="post">
@@ -70,10 +77,6 @@ export default function SinglePage() {
                   <FontAwesomeIcon icon={faStar} />
                 </div>
                 <div className="price">{venue.price} VND</div>
-              </div>
-              <div className="user">
-                <img src={venue.author.img} alt="" />
-                <span>{venue.author.name}</span>
               </div>
             </div>
             <div className="description">{venue.description}</div>
@@ -216,7 +219,7 @@ export default function SinglePage() {
           </div>
           <p className="title">Location</p>
           <div className="mapContainer">
-            <Map items={venue} />
+            <Map items={[venue]} />
           </div>
           <div className="buttons">
             <button onClick={toggleChat}>
@@ -232,10 +235,6 @@ export default function SinglePage() {
         {isChatVisible && (
           <div className="chatBox">
             <div className="top">
-              <div className="user">
-                <img src={venue.author.img} alt="" />
-                {venue.author.name}
-              </div>
               <span className="close" onClick={toggleChat}>
                 X
               </span>
@@ -251,39 +250,3 @@ export default function SinglePage() {
     </div>
   );
 }
-
-SinglePage.propTypes = {
-  venue: PropTypes.shape({
-    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    title: PropTypes.string,
-    img: PropTypes.string,
-    images: PropTypes.arrayOf(PropTypes.string),
-    address: PropTypes.string,
-    coordinates: PropTypes.shape({
-      latitude: PropTypes.number,
-      longitude: PropTypes.number,
-    }).isRequired,
-    capacity: PropTypes.number,
-    price: PropTypes.number,
-    rating: PropTypes.number,
-    size: PropTypes.number,
-    description: PropTypes.string,
-    placeType: PropTypes.string,
-    features: PropTypes.arrayOf(PropTypes.string).isRequired,
-    eventTypes: PropTypes.arrayOf(PropTypes.string).isRequired,
-    services: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        name: PropTypes.string.isRequired,
-        description: PropTypes.string,
-        price: PropTypes.number,
-        img: PropTypes.string,
-      })
-    ),
-    author: PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      img: PropTypes.string,
-    }),
-  }),
-};
