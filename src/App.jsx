@@ -9,7 +9,7 @@ import ProfilePage from "./routes/profilePage/profilePage";
 import Login from "./routes/login/login";
 import Signup from "./routes/signup/signup";
 import ServicePage from "./routes/servicePage/ServicePage";
-import BookingPage from "./routes/bookingPage/BookingPage";
+import EventList from "./routes/eventListPage/EventList";
 import UserManagement from "./admin/routes/userManagementPage/UserManagement";
 import OrderManagement from "./admin/routes/orderManagement/OrderManagement";
 import AddVenuePage from "./routes/addVenuePage/AddVenuePage";
@@ -19,7 +19,6 @@ import UpdateProfile from "./routes/updateProfile/UpdateProfile";
 import CreateService from "./routes/createService/CreateService";
 
 function App() {
-
   const router = createBrowserRouter([
     {
       path: "/",
@@ -30,12 +29,16 @@ function App() {
           element: <HomePage />,
         },
         {
-          path: "/list",
+          path: "/location",
           element: <ListPage />,
         },
         {
-          path: "/:id",
+          path: "/location/:id",
           element: <SinglePage />,
+        },
+        {
+          path: "/event",
+          element: <EventList />,
         },
         {
           path: "/profile",
@@ -60,10 +63,6 @@ function App() {
         {
           path: "/service",
           element: <ServicePage />,
-        },
-        {
-          path: "/booking",
-          element: <BookingPage />,
         },
         {
           path: "/payment",

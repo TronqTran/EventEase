@@ -11,31 +11,40 @@ import {
   faTag,
   faComment,
 } from "@fortawesome/free-solid-svg-icons";
-export default function Card({ item }) {
+
+export default function Card({ venue }) {
+  const imageUrl = venue.imageLocations.length > 0 ? venue.imageLocations[0].imageLink : venue.img;
+
   return (
     <div className="card">
-      <Link to={`/${item.id}`} state={{venue : item}} className="imageContainer">
-        <img src={item.img} />
+      <Link
+        to={`/location/${venue.id}`}
+        state={{ venue: venue }}
+        className="imageContainer"
+      >
+        <img src={imageUrl} alt={venue.title} />
       </Link>
       <div className="textContainer">
         <h2 className="title">
-          <Link to={`/${item.id}`} state={{venue :  item}} >{item.title}</Link>
+          <Link to={`/location/${venue.id}`} state={{ venue: venue }}>
+            {venue.title}
+          </Link>
         </h2>
         <p className="rating">
-          {item.rating}
+          {venue.rating}
           <FontAwesomeIcon icon={faStar} className="fontAwesomeIcon" />
         </p>
         <p className="address">
           <FontAwesomeIcon icon={faLocationDot} className="fontAwesomeIcon" />
-          <span>{item.address}</span>
+          <span>{venue.address}</span>
         </p>
-        <p className="price">{item.price} VND</p>
+        <p className="price">{venue.price} VND</p>
         <div className="bottom">
           <div className="features">
-          <div className="feature">
-          <FontAwesomeIcon icon={faUser} />
-          <span>{item.capacity} guests</span>
-          </div>
+            <div className="feature">
+              <FontAwesomeIcon icon={faUser} />
+              <span>{venue.capacity} guests</span>
+            </div>
             <div className="feature">
               <FontAwesomeIcon icon={faWifi} className="fontAwesomeIcon" />
             </div>
@@ -61,28 +70,33 @@ export default function Card({ item }) {
 }
 
 Card.propTypes = {
-  item: PropTypes.shape({
+  venue: PropTypes.shape({
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     title: PropTypes.string.isRequired,
     img: PropTypes.string,
-    images: PropTypes.arrayOf(PropTypes.string),
+    imageLocations: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        imageLink: PropTypes.string.isRequired,
+      })
+    ).isRequired,
     address: PropTypes.string,
-    coordinates: PropTypes.shape({
-      latitude: PropTypes.number,
-      longitude: PropTypes.number,
-    }).isRequired,
-    capacity: PropTypes.number,
+    latitude: PropTypes.number,
+    longitude: PropTypes.number,
+    capacity: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     price: PropTypes.number,
     rating: PropTypes.number,
     size: PropTypes.number,
     description: PropTypes.string,
     placeType: PropTypes.string,
-    services: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      description: PropTypes.string,
-      price: PropTypes.number,
-      img: PropTypes.string,
-    })), 
+    services: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        description: PropTypes.string,
+        price: PropTypes.number,
+        img: PropTypes.string,
+      })
+    ),
   }).isRequired,
 };

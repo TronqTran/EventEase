@@ -1,6 +1,7 @@
 import "./filter.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; 
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { eventcategorys } from "../../lib/venue_data_20";
 export default function Filter() {
   return (
     <div className="filter">
@@ -28,10 +29,11 @@ export default function Filter() {
         <div className="item">
           <label htmlFor="type">Type</label>
           <select name="type" id="type">
-            <option value="wedding">Wedding</option>
-            <option value="conference">Conference</option>
-            <option value="party">Party</option>
-            <option value="">Orther</option>
+          {eventcategorys.map((category) => (
+              <option key={category.id} value={category.categoryName.toLowerCase()}>
+                {category.categoryName}
+              </option>
+            ))} 
           </select>
         </div>
         <div className="item">

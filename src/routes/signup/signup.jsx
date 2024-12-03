@@ -2,16 +2,20 @@ import "./signup.scss";
 import {register} from '../../api/auth';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { employeeRegister } from "../../api/employeeService";
 
 export default function Signup() { 
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     userName: '',
-    phone: '',
+    phoneNumber: '',
     email: '',
     password: '',
     confirmPassword: '',
+    accountType: 'personal',
+    account: {}
   });
+
 
 
   const [error, setError] = useState(null);
@@ -21,6 +25,13 @@ export default function Signup() {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleAccountTypeChange = (e) => {
+    setFormData({
+      ...formData,
+      accountType: e.target.value,
     });
   };
 
@@ -34,11 +45,19 @@ export default function Signup() {
 
     try {
       console.log(formData)
-      const response = await register(formData);
-      console.log('Đăng ký thành công:', response);
-      setSuccess(response);
+      const accountResponse = await register(formData);
+      console.log('Đăng ký thành công:', accountResponse);
+      setSuccess(accountResponse);
       alert('Register successfully');
       navigate('/login');
+    
+      if (formData.accountType === 'business') {
+        const employeeResponse = await employeeRegister(formData);
+        console.log('Đăng ký nhân viên thành công:', employeeResponse);        
+      }
+
+      
+
 
     } catch (err) {
       console.error('Lỗi khi đăng ký:', err.message);
@@ -50,9 +69,31 @@ export default function Signup() {
     <div className="signup">
       <div className="inputContainer">
         <h1>Sign Up</h1>
+        <div className="accountTypeSelection">
+          <label>
+            <input 
+              type="radio" 
+              name="accountType" 
+              value="personal" 
+              checked={formData.accountType === 'personal'} 
+              onChange={handleAccountTypeChange} 
+            />
+            Personal Account
+          </label>
+          <label>
+            <input 
+              type="radio" 
+              name="accountType" 
+              value="business" 
+              checked={formData.accountType === 'business'} 
+              onChange={handleAccountTypeChange} 
+            />
+            Business Account
+          </label>
+        </div>
         <form onSubmit={handleSubmit}>
           <input type="text" name="userName" placeholder="Username" onChange={handleChange} />
-          <input type="text" name="phone" placeholder="Phone" onChange={handleChange}/>
+          <input type="text" name="phoneNumber" placeholder="Phone" onChange={handleChange}/>
           <input type="email" name="email" placeholder="Email" onChange={handleChange}/>
           <input type="password" name="password" placeholder="Password" onChange={handleChange}/>
           <input type="password" name="confirmPassword" placeholder="Confirm Password" onChange={handleChange}/>

@@ -19,7 +19,7 @@ export default function SearchBar() {
 
     // Navigate to the /list page
     // Optionally pass data via query params or state
-    navigate(`/list?location=${location}&date=${date}&members=${members}`);
+    navigate(`/location?location=${location}&date=${date}&members=${members}`);
   };
   
   return (

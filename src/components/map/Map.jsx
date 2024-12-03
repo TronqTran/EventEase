@@ -36,10 +36,8 @@ Map.propTypes = {
         img: PropTypes.string,
         images: PropTypes.arrayOf(PropTypes.string),
         address: PropTypes.string,
-        coordinates: PropTypes.shape({
-          latitude: PropTypes.number,
-          longitude: PropTypes.number,
-        }).isRequired,
+        latitude: PropTypes.number,
+        longitude: PropTypes.number,
         capacity: PropTypes.number,
         price: PropTypes.number,
         rating: PropTypes.number,
@@ -54,12 +52,7 @@ Map.propTypes = {
             price: PropTypes.number,
             img: PropTypes.string,
           })
-        ),
-        author: PropTypes.shape({
-          id: PropTypes.number.isRequired,
-          name: PropTypes.string.isRequired,
-          img: PropTypes.string,
-        }),
+        )
       })
     ),
     PropTypes.shape({
@@ -68,10 +61,8 @@ Map.propTypes = {
       img: PropTypes.string,
       images: PropTypes.arrayOf(PropTypes.string),
       address: PropTypes.string,
-      coordinates: PropTypes.shape({
-        latitude: PropTypes.number,
-        longitude: PropTypes.number,
-      }).isRequired,
+      latitude: PropTypes.number,
+      longitude: PropTypes.number,
       capacity: PropTypes.number,
       price: PropTypes.number,
       rating: PropTypes.number,
@@ -86,12 +77,7 @@ Map.propTypes = {
           price: PropTypes.number,
           img: PropTypes.string,
         })
-      ),
-      author: PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        name: PropTypes.string.isRequired,
-        img: PropTypes.string,
-      }),
+      )
     }),
   ]).isRequired,
 };

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const URL_BASE = 'http://localhost:8521/KLTN-2024/api/v1';
+export const URL_BASE = 'http://localhost:8521/KLTN-SERVER-2024/api/v1';
 
 export const register = async (data) => {
   const response = await axios ({
@@ -10,6 +10,7 @@ export const register = async (data) => {
       userName: data.userName,
       email: data.email,
       passWordAccount: data.password, 
+      phoneNumber: data.phoneNumber,
     }
   });
   return response.data;
@@ -26,3 +27,4 @@ export const login = async (data) => {
   });
   return response;
 }
+

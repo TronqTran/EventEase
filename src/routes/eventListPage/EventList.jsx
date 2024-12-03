@@ -1,11 +1,20 @@
 import { useEffect, useState } from "react";
-import { locationList} from "../../lib/venue_data_20"; // Import the static data
-import "./listPage.scss";
+import "./eventList.scss";
+import { useNavigate, useLocation } from "react-router-dom";
+import Slider from "../../components/imgSlider/Slider";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLocationDot, faStar } from "@fortawesome/free-solid-svg-icons";
+import PropTypes from "prop-types";
+import {
+  eventcategorys,
+  eventList,
+  locationList,
+} from "../../lib/venue_data_20";
+import Card from "../../components/eventCard/Card";
 import Filter from "../../components/filter/Filter";
-import Card from "../../components/locationCard/Card";
 import Map from "../../components/map/Map";
 
-export default function ListPage() {
+export default function EventList() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -29,12 +38,12 @@ export default function ListPage() {
   }
 
   return (
-    <div className="listPage">
-      <div className="listContainer">
+    <div className="bookingPage">
+      <div className="eventList">
         <div className="wrapper">
           <Filter />
-          {data.map((item) => (
-            <Card key={item.id} venue={item} />
+          {eventList.map((event) => (
+            <Card key={event.id} event={event} />
           ))}
         </div>
       </div>

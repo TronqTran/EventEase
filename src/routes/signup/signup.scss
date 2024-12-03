@@ -10,6 +10,12 @@
         align-items: center;
         gap: 20px;
 
+        .accountTypeSelection {
+            label {
+              margin-right: 25px; // Khoảng cách giữa các radio buttons
+            }
+          }
+
         form {
             display: flex;
             flex-direction: column;
